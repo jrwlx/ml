@@ -1,8 +1,11 @@
-import pandas as pd
 import numpy as np
-import sklearn
+import pandas as pd
 from sklearn import linear_model
+import sklearn
 from sklearn.utils import shuffle
+import matplotlib.pyplot as plt
+from matplotlib import style
+import pickle
 
 # loading data
 data = pd.read_csv("student-mat.csv", sep=";")
@@ -25,11 +28,14 @@ x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y
 # defining model
 linear = linear_model.LinearRegression()
 
-# training model
+# training models
 linear.fit(x_train, y_train)
 accuracy = linear.score(x_test, y_test)
-
 # print(accuracy)
+
+# saving model with pickle
+with open("studentgrades.pickle", "wb") as f:
+    pickle.dump(linear, f)
 
 # viewing constants
 # print('Coefficient: \n', linear.coef_) # slope values
