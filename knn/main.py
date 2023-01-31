@@ -1,16 +1,48 @@
-# This is a sample Python script.
+import sklearn
+from sklearn.utils import shuffle
+from sklearn.neighbors import KNeighborsClassifier
+import pandas as pd
+import numpy as np
+from sklearn import linear_model, preprocessing
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# loading data
+data = pd.read_csv("car.data")
+# print(data.head())
 
+# converting data into numeric values
+le = preprocessing.LabelEncoder()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+buying = le.fit_transform(list(data["buying"]))
+maint = le.fit_transform(list(data["maint"]))
+door = le.fit_transform(list(data["door"]))
+persons = le.fit_transform(list(data["persons"]))
+lug_boot = le.fit_transform(list(data["lug_boot"]))
+safety = le.fit_transform(list(data["safety"]))
+cls = le.fit_transform(list(data["class"]))
 
+predict = "class"
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# recombining data into a feature list and label list
+X = list(zip(buying, maint, door, persons, lug_boot, safety))
+y = list(cls)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# train data
+x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
+
+# creating KNN Classifier
+model = KNeighborsClassifier(n_neighbors=9)
+
+# training model
+model.fit(x_train, y_train)
+
+acc = model.score(x_test, y_test)
+print(acc)
+
+predicted = model.predict(x_test)
+names = ["unacc", "acc", "good", "vgood"]
+
+# testing model
+for x in range(len(predicted)):
+    print("Predicted: ", names[predicted[x]], "Data: ", x_test[x], "Actual: ", names[y_test[x]])
+    n = model.kneighbors([x_test[x]], 9, True)
+    print("N: ", n)
