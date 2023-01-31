@@ -7,4 +7,4 @@ Install tensorflow, sklearn, pickle, numpy, keras
 
 Run:
 When running code, make sure Conda Environment is active. 
-Uncomment lines 28-44 to create and train model with best possible accuracy or 
+Uncomment lines 28-44 to create and train model with best possible accuracy.
