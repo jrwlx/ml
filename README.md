@@ -1,8 +1,11 @@
 Project Description 
 
-Uses data from the the UCI Machine Learning Repository, manipulates data, train models, implements algorithm on model, and visualizes results. 
+Uses data from the the UCI Machine Learning Repository or sklearn, manipulates data, train models, implements algorithm on model, and visualizes results. 
+
 machinelearning folder implements linear regression. 
 knn folder implements K nearest neighbors. 
+svm folder implements a support vector machine.
+kclustering folder implements K means algorithm. 
  
 Setup
 
